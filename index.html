@@ -10,50 +10,12 @@
 <body>
     <div class="nav-bar"></div>
     <div id="app">
-        <div class="product">
-            <div class="product-image">
-                <img v-bind:src="image">
 
-            </div>
-
-            <div class="product-info">
-                <h1>{{ title }}</h1>
-                <p v-if="inStock">In Stock</p>
-                <p v-else :class="{outOfStock: !inStock}">In Stock</p>
-
-                <!-- <p v-if="inventory > 10"}>In Stock</p>
-                <p v-else-if="inventory <=10 && inventory > 0">Almost of Stock</p>
-                <p v-else>Out of Stock</p> -->
-                <p>{{sale}}</p>
-                <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
-                </ul>
-
-                <div v-for="(variant, index) in variants" :key="variant.variantId" class="color-box" :style="{ backgroundColor:variant.variantColor }" @mouseover="updateProduct(index)">
-                    <!-- <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p> -->
-                </div>
-
-                <div v-for="size in sizes">
-                    <p>{{ size }}</p>
-                </div>
-
-                <a :href="link" target="_blank">More products like this</a>
-
-                <div>
-                    <button v-on:click="addToCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Add to Cart</button>
-                </div>
-
-                <div>
-                    <button v-on:click="subtractFromCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Subtract from Cart</button>
-                </div>
-
-                <div class="cart">
-                    <p>Cart ({{cart}})</p>
-                </div>
-
+        <div class="cart">
+            <p>Cart ({{cart.length}})</p>
         </div>
 
-    </div>
+       <product :premium="premium" @add-to-cart="updateCart" @subtract-from-cart="subtractCart"></product>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="main.js"></script>
